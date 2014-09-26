@@ -14,4 +14,10 @@ RUN wget http://download.go.cd/gocd-rpm/go-server-14.2.0-377.noarch.rpm -q && \
 EXPOSE 8153
 EXPOSE 8154
 
+ADD go-server /etc/default/go-server
+RUN chown go:go /etc/default/go-server
+
+USER go
+
+CMD ["/usr/share/go-server/server.sh"]
 
