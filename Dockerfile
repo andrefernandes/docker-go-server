@@ -1,6 +1,6 @@
 # CentOS 7 + Go CD Server
 
-FROM andrefernandes/docker-devel-base
+FROM andrefernandes/docker-java7
 
 MAINTAINER Andre Fernandes
 
