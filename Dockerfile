@@ -17,17 +17,20 @@ RUN yum install git subversion -y && \
 EXPOSE 8153
 EXPOSE 8154
 
+# gera keys e aceita github
+RUN su -l go -c "ssh-keygen -q -f /var/go/.ssh/id_rsa -N ''" && \
+    su -l go -c "ssh -o StrictHostKeyChecking=no git@github.com; echo 'ok'"
+
 ADD go-server /etc/default/go-server
-RUN chown go:go /etc/default/go-server
+ADD startgo.sh /opt/startgo.sh
 
-USER go
-
-RUN ssh-keygen -q -f /var/go/.ssh/id_rsa -N ""
+RUN chown go:go /etc/default/go-server && \
+    mkdir -p /opt/go && \
+    chown go:go /opt/go && \
+    chmod +x /opt/startgo.sh
 
 WORKDIR /var/go
+VOLUME /opt/go
 
-# para aceitar a chave do servidor GitHub
-RUN ssh -o StrictHostKeyChecking=no git@github.com; echo "ok"
-
-CMD ["/usr/share/go-server/server.sh"]
+CMD ["/opt/startgo.sh"]
 
