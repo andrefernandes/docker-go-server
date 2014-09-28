@@ -26,5 +26,8 @@ RUN ssh-keygen -q -f /var/go/.ssh/id_rsa -N ""
 
 WORKDIR /var/go
 
+# para aceitar a chave do servidor GitHub
+RUN ssh -o StrictHostKeyChecking=no git@github.com; echo "ok"
+
 CMD ["/usr/share/go-server/server.sh"]
 
