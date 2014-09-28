@@ -15,6 +15,9 @@ The public key can be obtained from:
 
     ./runbash.sh cat /var/go/.ssh/id_rsa.pub
 
+This public key should be added to a Github account in order to
+enable git cloning right out-of-the-box.
+
 TODO:
 Declare volumes to permit mounting of persistent data.
 
